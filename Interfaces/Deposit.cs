@@ -72,9 +72,19 @@ namespace Interfaces
             return (Compare(left, right) < 0);
         }
 
+        public static bool operator <=(Deposit left, Deposit right)
+        {
+            return (Compare(left, right) <= 0);
+        }
+
         public static bool operator >(Deposit left, Deposit right)
         {
             return (Compare(left, right) > 0);
+        }
+
+        public static bool operator >=(Deposit left, Deposit right)
+        {
+            return (Compare(left, right) >= 0);
         }
     }
 }
