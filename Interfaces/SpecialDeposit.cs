@@ -1,14 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Interfaces
+﻿namespace Interfaces
 {
-    //TODO: Use class "SpecialDeposit" from previous task ("Aggregation").
+    public class SpecialDeposit : Deposit, IProlongable
+    {
+        public SpecialDeposit(decimal amount, int period) : base(amount, period)
+        {
+        }
 
+        public override decimal Income()
+        {
+            var baseAmount = Amount;
 
-    //TODO: Implement interface "IProlongable" in class "SpecialDeposit".
+            for (decimal i = 0; i < Period; i++)
+            {
+                var interest = (i + 1) / 100;
+                baseAmount += baseAmount * interest;
+            }
 
-    //Interface's method should return true if deposited more than 1000 UAH.
+            return baseAmount - Amount;
+        }
 
+        public bool CanToProlong()
+        {
+            return Amount > 1000;
+        }
+    }
 }

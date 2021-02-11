@@ -1,14 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Interfaces
+﻿namespace Interfaces
 {
-    //TODO: Use class "LongDeposit" from previous task ("Aggregation").
+    public class LongDeposit : Deposit, IProlongable
+    {
+        public LongDeposit(decimal amount, int period) : base(amount, period)
+        {
+        }
 
+        public override decimal Income()
+        {
+            var baseAmount = Amount;
+            const decimal interest = 0.15M;
 
-    //TODO: Implement interface "IProlongable" in class "LongDeposit".
+            for (int i = 6; i < Period; i++)
+            {
+                baseAmount += baseAmount * interest;
+            }
 
-    //Interface's method should return true if deposit term was no more than 3 years.
+            return baseAmount - Amount;
+        }
 
+        public bool CanToProlong()
+        {
+            return Period <= 12 * 3;
+        }
+    }
 }
